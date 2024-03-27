@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout
+from django.contrib import messages
 from item.models import Category, Item
-from .forms import SignupForm
+from .models import Feedback
+from .forms import SignupForm, FeedbackForm
 # Create your views here.
 
 def index(request):
@@ -14,12 +16,25 @@ def index(request):
 
 
 def contact(request):
-    return render(request, 'core/contact.html')
+    if request.method=='POST':
+        form=FeedbackForm(request.POST, request.FILES)
+        if form.is_valid():
+            item=form.save(commit=False)
+            item.save()
+            
+            return redirect('/')
+        
+            
+    else:
+        form = FeedbackForm()
+        return render(request, 'core/contact.html', {'form': form, 'title': 'Feedback Form'})
+
 
 
 def signup(request):
     if request.method=='POST':
         form=SignupForm(request.POST)
+        
         if form.is_valid():
             form.save()
             print(form)
@@ -31,3 +46,4 @@ def signup(request):
 def logout_view(request):
     logout(request)
     return redirect('/login/')
+

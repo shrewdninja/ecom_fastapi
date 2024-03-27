@@ -2,7 +2,7 @@
 {% block title%} {{ title }} {% endblock %}
 
 {% block content %}
-<div class="px-6 py-12 mt-6 bg-gray-100 rounded-xl">
+<div class="px-6 py-12 mt-6 bg-blue-50 rounded-xl">
     <h2 class="mb-12 text-2xl text-center">{{title}}</h2>
     <form method="post" action="." enctype="multipart/form-data">
         {% csrf_token %}
@@ -17,7 +17,7 @@
                 {{form.non_field_errors }}
             </div>
         {% endif %}
-        <button class="mt-6 py-3 px-8 text-lg bg-teal-500 hover:bg-teal-700 rounded-xl text-white">Submit</button>
+        <button class="mt-6 py-3 px-8 text-lg bg-blue-500 hover:bg-blue-700 rounded-xl text-white">Submit</button>
 
     </form>
 </div>

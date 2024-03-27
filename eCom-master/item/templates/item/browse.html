@@ -14,14 +14,14 @@
             <hr class="my-6"/>
 
             <p class="font-bold">Purpose</p>
-
-            <ul>
-                {% for category in categories %}
-                    <li class="py-2 px-2 rounded-xl {%if category.id == category_id %} bg-gray-200 {% endif %}">
-                        <a href="{% url 'item:browse' %}?query={{query}}&category={{category.id}}">{{category.name}}</a>
-                    </li>
-                {% endfor %}
-            </ul>
+            <div class="grid grid-cols-6 gap-3">
+                    {% for category in categories %}
+                        <ul class="py-2 px-2 rounded-xl {%if category.id == category_id %} bg-gray-200 {% endif %}">
+                            <a href="{% url 'item:browse' %}?query={{query}}&category={{category.id}}">{{category.name}}</a>
+                        </ul>
+                    {% endfor %}
+            </div>
+            
 
             {% if category_id %}
             <hr class="my-6">

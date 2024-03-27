@@ -3,5 +3,29 @@
 
 
 {% block content %}
-<h3>Contact with us</h3>
+<div class="px-6 py-12 mt-6 bg-blue-50 rounded-xl">
+    <h2 class="mb-12 text-2xl text-center">{{title}}</h2>
+    <form method="post" action="." enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="space-y-4">
+            {{form.as_p}}
+        </div>
+        {% if form.errors %}
+        {% for field in form %}
+            {% for error in field.errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+            {% endfor %}
+        {% endfor %}
+            {% for error in form.non_field_errors %}
+            <div class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+            </div>
+            {% endfor %}
+        {% endif %}
+        <button class="mt-6 py-3 px-8 text-lg bg-blue-500 hover:bg-blue-700 rounded-xl text-white">Submit</button>
+
+    </form>
+</div>
 {% endblock %}
