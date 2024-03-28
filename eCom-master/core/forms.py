@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm,PasswordChangeForm
 from django.contrib.auth.models import User
 from .models import Feedback
 from .validations import validate_description,validate_email,validate_username, validate_name
@@ -15,6 +15,22 @@ class LoginForm(AuthenticationForm):
          'placeholder': 'Enter password',
          'class': 'w-full py-4 px-6 rounded-xl'
     }))
+
+class CustomChangePasswordForm(PasswordChangeForm):
+     old_password = forms.CharField(widget=forms.PasswordInput(attrs={
+         'placeholder': 'Enter old password',
+         'class': 'w-full py-4 px-6 rounded-xl'
+    }))
+     new_password1 = forms.CharField(widget=forms.PasswordInput(attrs={
+         'placeholder': 'Enter new password',
+         'class': 'w-full py-4 px-6 rounded-xl'
+    }))
+     new_password2 = forms.CharField(widget=forms.PasswordInput(attrs={
+         'placeholder': 'Confirm new password',
+         'class': 'w-full py-4 px-6 rounded-xl'
+    }))
+     class meta:
+        model = User
 
 class SignupForm(UserCreationForm):
      class Meta:

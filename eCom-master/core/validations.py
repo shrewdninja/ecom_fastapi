@@ -10,16 +10,16 @@ def validate_name(value):
         raise ValidationError(u'%s contains unallowed characters. Please verify and enter again' % value)
     
 def validate_email(value):
-    pattern = r'^[\w\.-]+@[\w\.-]+\.\w+$'
+    pattern = r'^[\w\.]{3,30}+@[\w\.]+\.\w+$'
     if not re.match(pattern, value):
         raise ValidationError(u'%s contains unallowed characters. Please verify and enter again' % value)
     
 def validate_username(value):
-    pattern = r'^[\w\.-]$'
+    pattern = r'^[\w\.]{3,30}$'
     if not re.match(pattern, value):
         raise ValidationError(u'%s contains unallowed characters. Please verify and enter again' % value)
     
 def validate_description(value):
-    pattern = r'^(.|\s)+[\w\.-]+(.|\s)$'
+    pattern = r'^(.|\s)+[\w\.]+(.|\s)$'
     if not re.match(pattern, value):
         raise ValidationError(u'%s contains unallowed characters. Please verify and enter again' % value)

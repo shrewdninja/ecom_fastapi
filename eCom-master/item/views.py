@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from .models import Category, Item
-from .forms import NewItemForm, EditItemForm
+from .forms import NewItemForm, EditItemForm,OrderForm
 
 # Create your views here.
 
@@ -21,6 +21,24 @@ def new_item(request):
         form = NewItemForm()
 
     return render(request, 'item/newitem.html', {'form': form, 'title': 'New Item'})
+
+
+
+@login_required
+def buy_item(request):
+    if request.method=='POST':
+        form=OrderForm(request.POST, request.FILES)
+        if form.is_valid():
+            item=form.save(commit=False)
+            item.created_by = request.user
+            item.save()
+            
+            return redirect('item:detail', pk=item.id)
+    else:
+        form = OrderForm()
+
+    return render(request, 'item/buyitem.html', {'form': form, 'title': 'Buy Item'})
+
 
 
 

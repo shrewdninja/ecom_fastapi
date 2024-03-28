@@ -1,12 +1,13 @@
 from django.db import models
 # Create your models here.
+from .validations import validate_name,validate_description,validate_email,validate_username
     
 class Feedback(models.Model):
 
-    first_name = models.CharField(max_length=20)
-    last_name = models.CharField(max_length=20)
-    email = models.EmailField()
-    description=models.TextField()
+    first_name = models.CharField(max_length=20, validators=[validate_name])
+    last_name = models.CharField(max_length=20, validators=[validate_name])
+    email = models.EmailField(validators=[validate_email])
+    description=models.TextField(validators=[validate_description])
     image=models.ImageField(upload_to='feedback_images', blank=True, null=True)
    
     class Meta:
@@ -14,3 +15,4 @@ class Feedback(models.Model):
 
     def __str__(self) -> str:
         return self.name
+    

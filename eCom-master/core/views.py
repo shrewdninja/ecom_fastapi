@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import logout
+from django.contrib.auth import logout,update_session_auth_hash
 from django.contrib import messages
 from item.models import Category, Item
 from .models import Feedback
-from .forms import SignupForm, FeedbackForm
+from .forms import SignupForm, FeedbackForm,CustomChangePasswordForm
 # Create your views here.
 
 def index(request):
@@ -14,6 +14,21 @@ def index(request):
         'items': items
     })
 
+
+def changepasswordview(request):
+    if request.method == 'POST':
+        form = CustomChangePasswordForm(request.user,request.POST)
+        
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, request.user)
+            # messages.success(request,
+            #                  'Your password was successfully updated!',
+            #                  extra_tags='alert-success')
+            return redirect('/')
+    else:
+        form = CustomChangePasswordForm(user=request.user)
+    return render(request, 'core/changepassword.html', {'form': form})
 
 def contact(request):
     if request.method=='POST':
@@ -27,7 +42,7 @@ def contact(request):
             
     else:
         form = FeedbackForm()
-        return render(request, 'core/contact.html', {'form': form, 'title': 'Feedback Form'})
+    return render(request, 'core/contact.html', {'form': form, 'title': 'Feedback Form'})
 
 
 
