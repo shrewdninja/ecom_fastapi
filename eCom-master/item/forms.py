@@ -1,6 +1,6 @@
 from django import forms
 from .models import Item, Order
-from .validations import validate_card, validate_description, validate_email,validate_name, validate_username,validate_cvv, validate_price
+from .validations import validate_card, validate_description, validate_date, validate_email,validate_name, validate_username,validate_cvv, validate_price
 
 INPUT_CLASSES = 'w-full px-6 py-4 rounded-xl border'
 
@@ -58,6 +58,10 @@ class OrderForm(forms.ModelForm):
             'placeholder': 'Enter CVV',
             'class': 'w-full py-4 px-6 rounded-xl'
         }), validators=[validate_cvv])
+        expiry_date=forms.CharField(widget=forms.TextInput(attrs={
+            'placeholder': 'Enter expiry date in YYYY/MM format only',
+            'class': 'w-full py-4 px-6 rounded-xl'
+        }), validators=[validate_date])
         
         address = forms.CharField(
                widget=forms.TextInput(attrs={
@@ -70,12 +74,14 @@ class OrderForm(forms.ModelForm):
             'class': INPUT_CLASSES            
             }),
             'card_number': forms.TextInput(attrs={
-            'class': INPUT_CLASSES            
+            'class': INPUT_CLASSES       
             }),
             'cvv': forms.TextInput(attrs={
             'class': INPUT_CLASSES            
             }),
-            'expiry_date': forms.DateInput(),
+            'expiry_date': forms.TextInput(attrs={
+            'class': INPUT_CLASSES            
+            }),
             'address': forms.Textarea(attrs={
             'class': INPUT_CLASSES
             })

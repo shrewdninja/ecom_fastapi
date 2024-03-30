@@ -33,7 +33,7 @@ def buy_item(request, pk):
             item.created_by = request.user
             item.save()
             
-            return redirect('core:authorized')
+            return render(request, 'item/authorized.html')
     else:
         form = OrderForm()
 

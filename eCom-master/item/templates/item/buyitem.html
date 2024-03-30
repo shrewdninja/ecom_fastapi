@@ -4,6 +4,11 @@
 {% block content %}
 <div class="px-6 py-12 mt-6 bg-blue-50 rounded-xl">
     <h2 class="mb-12 text-2xl text-center">Payment Information</h2>
+    <div class="p-6 bg-red-50 rounded-xl">
+        <p class="text-white-500"><strong>* Card number should be 16 digits</strong></p> 
+        <p class="text-white-500"><strong>* CVV should be 3 digits</strong></p> 
+        <p class="text-white-500"><strong>* Expiry Date should be in the format YYYY/MM only</strong></p> 
+    </div>
     <form method="POST" action=".">
             {% csrf_token %}
             

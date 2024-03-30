@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from decimal import Decimal
-from .validations import validate_email,validate_card,validate_description,validate_name,validate_username, validate_price, validate_cvv
+from .validations import validate_email,validate_card,validate_description,validate_name,validate_username, validate_date, validate_price, validate_cvv
 # Create your models here.
 class Category(models.Model):
     name=models.CharField(max_length=255, validators=[validate_name])
@@ -34,7 +34,7 @@ class Order(models.Model):
     name=models.CharField(max_length=255, validators=[validate_name])
     card_number = models.CharField( max_length=16,validators=[validate_card])
     cvv = models.CharField(max_length=3,validators=[validate_cvv])
-    expiry_date = models.DateField() 
+    expiry_date = models.CharField(max_length=7,validators=[validate_date])
     address=models.TextField(max_length=255,validators=[validate_description])
     
     created_by=models.ForeignKey(User, related_name='orders', on_delete=models.CASCADE)
