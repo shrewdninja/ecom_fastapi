@@ -1,0 +1,13 @@
+{% extends 'core/base.html' %}
+{% block title %} Sign up {% endblock %}
+
+{% block content %}
+<div class="w-1/2 my-6 mx-auto p-6 bg-blue-50 rounded-xl">
+    <h1 class="mb-6 text-3xl">Payment Successful</h1>
+    <div class="p-6 bg-green-100 rounded-xl">
+        <p class="text-white-500"><strong>Thank you for the payment! Your order will be processed.</strong></p> 
+    </div>
+    <a href="{% url 'dashboard:dashboard' %}" class="font-bold hover:text-green-800 text-green-700">Return Home</a>
+
+</div>
+{% endblock %}

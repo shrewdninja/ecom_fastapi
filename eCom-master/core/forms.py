@@ -69,10 +69,29 @@ class FeedbackForm(forms.ModelForm):
                'placeholder': 'Email address',
                'class': 'w-full px-6 py-4 rounded-xl border'
           }), validators=[validate_email])
-          description=forms.CharField(widget=forms.TextInput(attrs={
+          description=forms.CharField(
+               widget=forms.TextInput(attrs={
                'placeholder': 'Enter details here',
                'class': 'w-full px-6 py-4 rounded-xl border'
           }), validators=[validate_description])
-          image=forms.FileInput(attrs={
-               'class': 'w-full px-6 py-4 rounded-xl border'
-          })
+          image=forms.FileInput(
+          #     attrs={
+          #      'class': 'w-full px-6 py-4 rounded-xl border'}
+          )
+          widgets={
+            'first_name': forms.TextInput(attrs={
+            'class': INPUT_CLASSES
+            }),
+            'last_name': forms.TextInput(attrs={
+            'class': INPUT_CLASSES            
+            }),
+            'email': forms.TextInput(attrs={
+            'class': INPUT_CLASSES
+            }),
+            'description': forms.Textarea(attrs={
+            'class': INPUT_CLASSES
+            }),
+            'image': forms.FileInput(attrs={
+            'class': INPUT_CLASSES
+            })
+        }

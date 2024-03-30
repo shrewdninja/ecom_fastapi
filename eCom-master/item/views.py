@@ -25,7 +25,7 @@ def new_item(request):
 
 
 @login_required
-def buy_item(request):
+def buy_item(request, pk):
     if request.method=='POST':
         form=OrderForm(request.POST, request.FILES)
         if form.is_valid():
@@ -33,7 +33,7 @@ def buy_item(request):
             item.created_by = request.user
             item.save()
             
-            return redirect('item:detail', pk=item.id)
+            return redirect('core:authorized')
     else:
         form = OrderForm()
 

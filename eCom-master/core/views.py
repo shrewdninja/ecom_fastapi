@@ -3,6 +3,8 @@ from django.contrib.auth import logout,update_session_auth_hash
 from django.contrib import messages
 from item.models import Category, Item
 from .models import Feedback
+from django.contrib.auth.forms import UserCreationForm
+
 from .forms import SignupForm, FeedbackForm,CustomChangePasswordForm
 # Create your views here.
 

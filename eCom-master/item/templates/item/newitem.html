@@ -4,6 +4,9 @@
 {% block content %}
 <div class="px-6 py-12 mt-6 bg-blue-50 rounded-xl">
     <h2 class="mb-12 text-2xl text-center">{{title}}</h2>
+    <div class="p-6 bg-red-100 rounded-xl">
+        <p class="text-white-500"><strong>* Max price for an item is $999,999.00</strong></p> 
+    </div>
     <form method="post" action="." enctype="multipart/form-data">
         {% csrf_token %}
         <div class="space-y-4">
