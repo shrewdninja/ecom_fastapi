@@ -10,5 +10,6 @@ urlpatterns=[
     path('<int:pk>/edit/', views.edit_item, name='edit'),
     path('<int:pk>/delete/', views.delete, name='delete'),
     path('<int:pk>/buy/', views.buy_item, name='buy'),
+    path('<int:pk>/authorized/', views.buy_item, name='buy')
     
 ]

@@ -19,9 +19,7 @@ class NewItemForm(forms.ModelForm):
           }), validators=[validate_description])
         price = forms.FloatField(
             min_value=0, max_value= 999999,
-            widget=forms.NumberInput(
-                attrs={'step': "0.01"}
-                ), validators=[validate_price]
+            widget=forms.NumberInput(), validators=[validate_price]
                 ) 
         widgets={
             'category': forms.Select(attrs={
@@ -34,7 +32,8 @@ class NewItemForm(forms.ModelForm):
             'class': INPUT_CLASSES
             }),
             'price': forms.NumberInput(attrs={
-            'class': INPUT_CLASSES
+            'class': INPUT_CLASSES,
+            'step': "0.01"
             }),
             'image': forms.FileInput(attrs={
             'class': INPUT_CLASSES
